@@ -1,7 +1,9 @@
 # Blockchain
 
 A small Blockchain build on Python for know more about this technology and their implementation.
+
 Project based on Learn Blockchains by Building One
+
 This project are only for study purposes
 
 ## Installation
