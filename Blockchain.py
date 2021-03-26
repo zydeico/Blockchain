@@ -55,6 +55,9 @@ class Blockchain:
             if block['previous_hash'] != last_block_hash:
                 return False
 
+            if not self.valid_proof(last_block["proof"], block["proof"], last_block_hash):
+                return False
+
             last_block = block
             current_index = + 1
 
@@ -252,6 +255,7 @@ def register_nodes():
     }
     return jsonify(response), 201
 
+
 @app.route('/nodes/resolve', methods=['GET'])
 def consensus():
     replaced = blockchain.resolve_conflicts()
@@ -278,4 +282,3 @@ if __name__ == 'main':
     port = args.port
 
     app.run(host='0.0.0.0', port=port)
-
