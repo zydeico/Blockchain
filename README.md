@@ -23,6 +23,10 @@ $ pipenv install
     * `$ pipenv run python Blockchain.py -p 5001`
     * '$ pipenv run python Blockchain.py --port 5002'
 ```
+5. Do some request using postman using this endpoint
+```
+http://0.0.0.0:5000/mine
+```
 
 NOTE: If you have any error importing request or flask running 4th commands, you can try:
 ```
