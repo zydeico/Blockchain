@@ -114,13 +114,13 @@ class Blockchain:
         return block
 
     def new_transactions(self, sender, reciper, amount):
-        '''
+        """
         Creates a new transaction to go into the next block
         :param sender: Address of the sender
         :param reciper: Address of the recipient
         :param amount: Amount
         :return: The index of the block that will hold this transaction
-        '''
+        """
 
         self.current_transactions.append({
             'sender': sender,
@@ -136,20 +136,20 @@ class Blockchain:
 
     @staticmethod
     def hash(block):
-        '''
+        """
         Creates a SHA-256 hash of block
         :param block: Block
-        '''
+        """
 
         block_string = json.dumps(block, sort_keys=True).encode()
         return hashlib.sha256(block_string).hexdigest()
 
     def proof_of_work(self, last_block):
-        '''
+        """
         Proof of work algorithm test
         :param last_block: last block
         :return: <Int>
-        '''
+        """
 
         last_proof = last_block['proof']
         last_hash = self.hash(last_block)
@@ -162,13 +162,13 @@ class Blockchain:
 
     @staticmethod
     def valid_proof(last_proof, proof, last_hash):
-        '''
+        """
         Validates the Proof
         :param last_proof: Previous proof
         :param proof: Current proof
         :param last_hash: The hash of the previous block
         :return: True = correct, False if not
-        '''
+        """
 
         guess = f'{last_proof}{proof}{last_hash}'.encode()
         guess_hash = hashlib.sha256(guess).hexdigest()
@@ -191,7 +191,7 @@ def mine():
     last_block = blockchain.last_block
     proof = blockchain.proof_of_work(last_block)
 
-    # We must recive a rewar of finding the proof
+    # We must receive a reward of finding the proof
     blockchain.new_transactions(
         sender=0,
         reciper=node_identifier,
@@ -208,7 +208,7 @@ def mine():
         'proof': block['proof'],
         'previous_hash': block['previous_hash'],
     }
-    return jsonify[response], 200
+    return jsonify(response), 200
 
 
 @app.route('/transactions/new', methods=['POST'])
@@ -224,9 +224,9 @@ def new_transaction():
     index = blockchain.new_transactions(values['sender'], values['recipient'], values['amount'])
 
     response = {
-        'message': f'Transaccion will be added to Block {index}'
+        'message': f'Transaction will be added to Block {index}'
     }
-    return jsonify[response], 201
+    return jsonify(response), 202
 
 
 @app.route('/nodes/register', methods=['POST'])
@@ -244,7 +244,7 @@ def register_nodes():
 
     nodes = values.get('nodes')
     if nodes is None:
-        return "Error: suply a valid list of nodes", 400
+        return "Error: supply a valid list of nodes", 400
 
     for node in nodes:
         blockchain.register_node(node)
@@ -267,7 +267,7 @@ def consensus():
         }
     else:
         response = {
-            'message': 'Our chain is autoritatived',
+            'message': 'Our chain is authoritative',
             'chain': blockchain.chain,
         }
     return jsonify(response), 200
