@@ -19,9 +19,9 @@ $ pipenv install
 ```
 4. Run the server
 ```
-    * `$ pipenv run python Blockchain.py`
-    * `$ pipenv run python Blockchain.py -p 5001`
-    * '$ pipenv run python Blockchain.py --port 5002'
+    * $ pipenv run python Blockchain.py
+    * $ pipenv run python Blockchain.py -p 5001
+    * $ pipenv run python Blockchain.py --port 5002
 ```
 5. Do some request using postman using this endpoint
 ```
