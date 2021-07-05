@@ -52,14 +52,22 @@ class Blockchain:
 
             # Check that the hash of the block is correct
             last_block_hash = self.hash(last_block)
-            if block['previous_hash'] != last_block_hash:
+            if block['previous_hash'] != self.hash(last_block_hash):
                 return False
+            last_block = last_block['proof']
+            proof = block['proof']
+            hashOperation = hashlib.sha256(str(proof ** 2 - last_block ** 2).encode()).hexdigest()
+
+            '''
+                        if hashOperation[:4] != '0000':
+                return False
+            '''
 
             if not self.valid_proof(last_block["proof"], block["proof"], last_block_hash):
                 return False
 
             last_block = block
-            current_index = + 1
+            current_index += 1
 
         return True
 
@@ -181,10 +189,11 @@ app = Flask(__name__)
 # Generate a globally unique address for this node
 node_identifier = str(uuid4()).replace('-', '')
 
-# Instantiate blockchain
+# Instantiate blockchain for web app
 blockchain = Blockchain()
 
 
+# Web App
 @app.route('/mine', methods=['GET'])
 def mine():
     # Run the proof of work algorithm to get the next proof
@@ -270,6 +279,17 @@ def consensus():
             'message': 'Our chain is authoritative',
             'chain': blockchain.chain,
         }
+    return jsonify(response), 200
+
+
+# Check if my blockchain is valid returning true or false
+@app.route('/is_valid', methods=['GET'])
+def isValid():
+    is_valid = blockchain.valid_chain(blockchain.chain)
+    if is_valid:
+        response = {'message': 'All good, this blockchain is valid'}
+    else:
+        response = {'message': 'We have a problem, this blockchain is not valid'}
     return jsonify(response), 200
 
 
