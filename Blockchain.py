@@ -52,22 +52,14 @@ class Blockchain:
 
             # Check that the hash of the block is correct
             last_block_hash = self.hash(last_block)
-            if block['previous_hash'] != self.hash(last_block_hash):
+            if block['previous_hash'] != last_block_hash:
                 return False
-            last_block = last_block['proof']
-            proof = block['proof']
-            hashOperation = hashlib.sha256(str(proof ** 2 - last_block ** 2).encode()).hexdigest()
-
-            '''
-                        if hashOperation[:4] != '0000':
-                return False
-            '''
 
             if not self.valid_proof(last_block["proof"], block["proof"], last_block_hash):
                 return False
 
             last_block = block
-            current_index += 1
+            current_index = + 1
 
         return True
 
