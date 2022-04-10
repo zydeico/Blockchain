@@ -9,9 +9,10 @@ This project are only for study purposes
 ## Installation
 1. Run python 3.6+
 2. Install pipenv
+3. Verify that you have pip3 installed
 
 ```
-$ pip install pipenv 
+$ pip3 install pipenv 
 ```
 3. Install all the requirements (Flask and request install over pipenv)
 ```
@@ -19,9 +20,9 @@ $ pipenv install
 ```
 4. Run the server
 ```
-    * $ pipenv run python Blockchain.py
-    * $ pipenv run python Blockchain.py -p 5001
-    * $ pipenv run python Blockchain.py --port 5002
+    * $ pipenv run python3 Blockchain.py
+    * $ pipenv run python3 Blockchain.py -p 5001
+    * $ pipenv run python3 Blockchain.py --port 5002
 ```
 5. Do some request using postman using this endpoint
 ```
