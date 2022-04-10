@@ -33,3 +33,15 @@ NOTE: If you have any error importing request or flask running 4th commands, you
 ```
 $ pipenv run pip3 install flask && pipenv run pip3 install requests
 ```
+
+## Check how it works in postman
+Well, you can check the postman and see how it works.
+You can do a POST request to this endpoint and see how it works.
+```
+$ http://192.168.1.104:5010/nodes/register?chain=1287d04faacf3231b6f7464ae68c2c63d4549c9ca27374b8d54aa6bc81e26c6b48&length=15514013
+```
+
+To check your nodes, do a GET request to this endpoint
+```
+$ http://192.168.1.104:5010/nodes/register?chain=1287d04faacf3231b6f7464ae68c2c63d4549c9ca27374b8d54aa6bc81e26c6b48&length=15514013
+```
