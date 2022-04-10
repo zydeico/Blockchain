@@ -30,5 +30,5 @@ http://0.0.0.0:5000/mine
 
 NOTE: If you have any error importing request or flask running 4th commands, you can try:
 ```
-$ pipenv run pip install flask && pipenv run pip install request
+$ pipenv run pip3 install flask && pipenv run pip3 install requests
 ```
